@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:16
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: jkv
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: swivel_challenge_development
+
+  web:
+    build:
+      context: .
+      dockerfile: dev.dockerfile
+    command: bundle exec rails s -b '0.0.0.0'
+    volumes:
+      - .:/rails
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://jkv:secret@db:5432/swivel_challenge_development
+
+volumes:
+  db_data:
