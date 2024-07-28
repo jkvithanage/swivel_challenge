@@ -1,9 +1,11 @@
 class Vertical < ApplicationRecord
-  has_many :categories
+  has_many :categories, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 
   validate :unique_name_across_categories
+
+  accepts_nested_attributes_for :categories, allow_destroy: true
 
   private
 
