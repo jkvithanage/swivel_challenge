@@ -1,4 +1,6 @@
 class Course < ApplicationRecord
+  searchkick
+
   belongs_to :category
 
   validates :name, presence: true

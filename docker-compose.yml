@@ -19,8 +19,23 @@ services:
       - '3000:3000'
     depends_on:
       - db
+      - elasticsearch
     environment:
-      DATABASE_URL: postgres://jkv:secret@db:5432/swivel_challenge_development
+      - DATABASE_URL=postgres://jkv:secret@db:5432/swivel_challenge_development
+      - ELASTICSEARCH_URL=elasticsearch
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=secret
+      - ELASTICSEARCH_PORT=9200
+
+  elasticsearch:
+    image: elasticsearch:8.14.3
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=secret
+      - xpack.security.enabled=true
+    ports:
+      - "9200:9200"
 
 volumes:
   db_data:
