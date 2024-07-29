@@ -1,5 +1,7 @@
 require 'json'
 
+User.create(email: 'user@example.com', password: 'secret', password_confirmation: 'secret')
+
 verticals_file = File.read('./json/verticals.json')
 categories_file = File.read('./json/categories.json')
 courses_file = File.read('./json/courses.json')
