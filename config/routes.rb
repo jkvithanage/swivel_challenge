@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :verticals
       resources :categories
-      resources :courses
+      resources :courses do
+        get :search, on: :collection, as: :search
+      end
 
       resources :users, only: [:create]
     end

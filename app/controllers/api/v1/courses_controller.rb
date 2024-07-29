@@ -2,8 +2,13 @@ class Api::V1::CoursesController < ApplicationController
   before_action :set_course, only: %i[show update destroy]
 
   def index
-    @courses = Course.all
+    @courses = Course.search('*', page: params[:page], per_page: 20).to_a
     render json: @courses
+  end
+
+  def search
+    results = Course.search(params[:query], fields: %i[name author], operator: "or")
+    render json: results
   end
 
   def show
