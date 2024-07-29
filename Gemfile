@@ -57,6 +57,6 @@ group :development do
   # gem "spring"
 end
 
-gem 'devise'
+gem 'devise', '~> 4.9', '>= 4.9.4'
 
-gem 'doorkeeper'
+gem 'doorkeeper', '~> 5.7', '>= 5.7.1'

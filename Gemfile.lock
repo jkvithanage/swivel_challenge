@@ -276,8 +276,8 @@ DEPENDENCIES
   bootsnap
   database_cleaner-active_record (~> 2.2)
   debug
-  devise
-  doorkeeper
+  devise (~> 4.9, >= 4.9.4)
+  doorkeeper (~> 5.7, >= 5.7.1)
   factory_bot_rails (~> 6.4, >= 6.4.3)
   faker (~> 3.4, >= 3.4.2)
   pg (~> 1.1)
