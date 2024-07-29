@@ -33,3 +33,8 @@ courses_data.each do |course_data|
   course.category_id = course_data['Categories']
   p course if course.save!
 end
+
+# resetting primary key sequence
+ActiveRecord::Base.connection.reset_pk_sequence!('verticals')
+ActiveRecord::Base.connection.reset_pk_sequence!('categories')
+ActiveRecord::Base.connection.reset_pk_sequence!('courses')
