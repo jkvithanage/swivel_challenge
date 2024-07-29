@@ -29,6 +29,7 @@ class Api::V1::CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
+    head :no_content
   end
 
   private
