@@ -45,6 +45,8 @@ group :development, :test do
 
   gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
 
+  gem 'rubocop', require: false
+
   gem 'shoulda-matchers', '~> 6.2'
 
   gem 'faker', '~> 3.4', '>= 3.4.2'
@@ -54,3 +56,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+gem 'devise'
+
+gem 'doorkeeper'
