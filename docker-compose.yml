@@ -7,6 +7,11 @@ services:
       POSTGRES_USER: jkv
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: swivel_challenge_development
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U jkv -d swivel_challenge_development" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   web:
     build:
@@ -18,14 +23,17 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - db
-      - elasticsearch
+      db:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
     environment:
       - DATABASE_URL=postgres://jkv:secret@db:5432/swivel_challenge_development
       - ELASTICSEARCH_URL=elasticsearch
       - ELASTICSEARCH_USERNAME=elastic
       - ELASTICSEARCH_PASSWORD=secret
       - ELASTICSEARCH_PORT=9200
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
 
   elasticsearch:
     image: elasticsearch:8.14.3
@@ -33,9 +41,18 @@ services:
       - discovery.type=single-node
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=secret
-      - xpack.security.enabled=true
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
     ports:
       - "9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -fsSL http://localhost:9200/_cluster/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   db_data:
+  es-data:
