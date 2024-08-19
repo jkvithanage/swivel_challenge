@@ -2,18 +2,13 @@ class Api::V1::VerticalsController < ApplicationController
   before_action :set_vertical, only: %i[show update destroy]
 
   def index
-    verticals = Vertical.includes(:categories)
-    render json: verticals, meta: { total: courses.count }
+    verticals = Vertical.includes(:categories).page(params[:page]).per(10)
+    render json: verticals, meta: { total: verticals.total_count, total_pages: verticals.total_pages, current_page: verticals.current_page }
   end
 
   def search
-    results = if params[:query].present?
-                SearchService.new(Vertical, params[:query], params[:sort], %i[name]).call
-              else
-                Course.search('*')
-              end
-
-    render json: results, meta: { total: results.count }
+    results = SearchService.new(Vertical, %i[name], params[:query], params[:sort], params[:page], 10).call
+    render json: results, meta: { total: results.total_count, total_pages: results.total_pages, current_page: results.current_page }
   end
 
   def show

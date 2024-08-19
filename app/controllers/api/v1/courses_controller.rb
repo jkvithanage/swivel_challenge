@@ -2,18 +2,13 @@ class Api::V1::CoursesController < ApplicationController
   before_action :set_course, only: %i[show update destroy]
 
   def index
-    courses = Course.all
-    render json: courses, meta: { total: courses.count }
+    courses = Course.page(params[:page]).per(10)
+    render json: courses, meta: { total: courses.total_count, total_pages: courses.total_pages, current_page: courses.current_page }
   end
 
   def search
-    results = if params[:query].present?
-                SearchService.new(Course, params[:query], params[:sort], %i[name author]).call
-              else
-                Course.search('*')
-              end
-
-    render json: results, meta: { total: results.count }
+    results = SearchService.new(Course, %i[name], params[:query], params[:sort], params[:page], 10).call
+    render json: results, meta: { total: results.total_count, total_pages: results.total_pages, current_page: results.current_page }
   end
 
   def show
