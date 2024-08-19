@@ -2,18 +2,13 @@ class Api::V1::CategoriesController < ApplicationController
   before_action :set_category, only: %i[show update destroy]
 
   def index
-    categories = Category.includes(:courses)
-    render json: categories, meta: { total: courses.count }
+    categories = Category.includes(:courses).page(params[:page]).per(10)
+    render json: categories, meta: { total: categories.total_count, total_pages: categories.total_pages, current_page: categories.current_page }
   end
 
   def search
-    results = if params[:query].present?
-                SearchService.new(Category, params[:query], params[:sort], %i[name]).call
-              else
-                Course.search('*')
-              end
-
-    render json: results, meta: { total: results.count }
+    results = SearchService.new(Category, %i[name], params[:query], params[:sort], params[:page], 10).call
+    render json: results, meta: { total: results.total_count, total_pages: results.total_pages, current_page: results.current_page }
   end
 
   def show

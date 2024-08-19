@@ -11,10 +11,12 @@ class Api::V1::SearchController < ApplicationController
       fields: [:name, :author],
       operator: "or",
       match: :word_middle,
-      order: sort_by(params[:sort])
+      order: sort_by(params[:sort]),
+      page: params[:page],
+      per_page: 10
     )
 
-    render json: results
+    render json: results, meta: { total: results.total_count, total_pages: results.total_pages, current_page: results.current_page }
   end
 
   private

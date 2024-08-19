@@ -1,9 +1,11 @@
 class SearchService
-  def initialize(model, query, sort, fields)
+  def initialize(model, fields, query, sort, page, per_page)
     @model = model
     @query = query
     @sort = sort
     @fields = fields
+    @page = page
+    @per_page = per_page
   end
 
   def call
@@ -13,7 +15,9 @@ class SearchService
         fields: @fields,
         operator: "or",
         order: sort_by(@sort),
-        match: :word_middle
+        match: :word_middle,
+        page: @page,
+        per_page: @per_page
       )
     else
       @model.search('*')

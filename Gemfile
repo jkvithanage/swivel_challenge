@@ -66,3 +66,5 @@ gem 'elasticsearch', '~> 8.14'
 gem 'searchkick', '~> 5.3', '>= 5.3.1'
 
 gem 'active_model_serializers', '~> 0.10.14'
+
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
