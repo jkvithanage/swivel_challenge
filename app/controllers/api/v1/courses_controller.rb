@@ -2,13 +2,24 @@ class Api::V1::CoursesController < ApplicationController
   before_action :set_course, only: %i[show update destroy]
 
   def index
-    @courses = Course.search('*', page: params[:page], per_page: 20).to_a
-    render json: @courses
+    courses = Course.all
+    render json: courses, meta: { total: courses.count }
   end
 
   def search
-    results = Course.search(params[:query], fields: %i[name author], operator: "or")
-    render json: results
+    results = if params[:query].present?
+                Course.search(
+                  params[:query],
+                  fields: %i[name author],
+                  operator: "or",
+                  order: { _score: :desc },
+                  match: :word_middle
+                )
+              else
+                Course.search('*')
+              end
+
+    render json: results, meta: { total: results.count }
   end
 
   def show
@@ -16,11 +27,11 @@ class Api::V1::CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(course_params)
-    if @course.save
-      render json: @course, status: :created
+    course = Course.new(course_params)
+    if course.save
+      render json: course, status: :created
     else
-      render json: @course.errors, status: :unprocessable_entity
+      render json: course.errors, status: :unprocessable_entity
     end
   end
 

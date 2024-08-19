@@ -2,27 +2,27 @@ class Api::V1::VerticalsController < ApplicationController
   before_action :set_vertical, only: %i[show update destroy]
 
   def index
-    @verticals = Vertical.all
-    render json: @verticals, include: { categories: { include: :courses } }
+    verticals = Vertical.includes(:categories)
+    render json: verticals, meta: { total: courses.count }
   end
 
   def show
-    render json: @vertical, include: { categories: { include: :courses } }
+    render json: { data: @vertical }
   end
 
   def create
-    @vertical = Vertical.new(vertical_params)
+    vertical = Vertical.new(vertical_params)
 
-    if @vertical.save
-      render json: @vertical.as_json(include: { categories: { include: :courses } }), status: :created
+    if vertical.save
+      render json: vertical, status: :created
     else
-      render json: @vertical.errors, status: :unprocessable_entity
+      render json: vertical.errors, status: :unprocessable_entity
     end
   end
 
   def update
     if @vertical.update(vertical_params)
-      render json: @vertical.as_json(include: { categories: { include: :courses } })
+      render json: @vertical
     else
       render json: @vertical.errors, status: :unprocessable_entity
     end
@@ -40,8 +40,6 @@ class Api::V1::VerticalsController < ApplicationController
   end
 
   def vertical_params
-    params.require(:vertical).permit(:name,
-                                     categories_attributes: [:id, :name, :state, :_destroy,
-                                                             { courses_attributes: %i[id name author state _destroy] }])
+    params.require(:vertical).permit(:name, categories_attributes: [:id, :name, :state, :_destroy])
   end
 end
