@@ -2,26 +2,26 @@ class Api::V1::CategoriesController < ApplicationController
   before_action :set_category, only: %i[show update destroy]
 
   def index
-    @categories = Category.all
-    render json: @categories, include: :courses
+    categories = Category.includes(:courses)
+    render json: categories, meta: { total: courses.count }
   end
 
   def show
-    render json: @category, include: :courses
+    render json: @category
   end
 
   def create
-    @category = Category.new(category_params)
-    if @category.save
-      render json: @category.as_json(include: :courses), status: :created
+    category = Category.new(category_params)
+    if category.save
+      render json: category, status: :created
     else
-      render json: @category.errors, status: :unprocessable_entity
+      render json: category.errors, status: :unprocessable_entity
     end
   end
 
   def update
     if @category.update(category_params)
-      render json: @category.as_json(include: :courses)
+      render json: @category
     else
       render json: @category.errors, status: :unprocessable_entity
     end

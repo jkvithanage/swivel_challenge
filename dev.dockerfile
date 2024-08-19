@@ -9,7 +9,9 @@ WORKDIR /rails
 
 # Set development environment
 ENV RAILS_ENV="development" \
-  BUNDLE_WITHOUT=""
+  BUNDLE_PATH="/usr/local/bundle" \
+  BUNDLE_WITHOUT="" \
+  PATH="/rails/bin:$PATH"
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
@@ -27,7 +29,12 @@ RUN bundle exec bootsnap precompile app/ lib/
 
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
-  chown -R rails:rails db log storage tmp
+  chown -R rails:rails /rails /usr/local/bundle db log storage tmp
+
+# Symlink the Rails binary to /usr/local/bin to run `rails` directly
+RUN ln -s /rails/bin/rails /usr/local/bin/rail
+
+# Switch to non-root user for security
 USER rails:rails
 
 # Entrypoint prepares the database.

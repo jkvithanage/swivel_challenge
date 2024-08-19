@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-  searchkick
+  searchkick word_middle: [:name, :author]
 
   belongs_to :category
 
