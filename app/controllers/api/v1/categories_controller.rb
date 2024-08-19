@@ -39,6 +39,6 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:name, :vertical_id, courses_attributes: %i[id name author state _destroy])
+    params.require(:category).permit(:name, :vertical_id, :state, courses_attributes: %i[id name author state _destroy])
   end
 end

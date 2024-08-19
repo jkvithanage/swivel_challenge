@@ -5,24 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be662c1d-ccd2-4231-a6fc-e90e101d985f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/serializers/api/v1/category_serializer.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/serializers/api/v1/course_serializer.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/serializers/api/v1/vertical_serializer.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/initializers/ams.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/swivel_challenge.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/swivel_challenge.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/concerns/exception_handler.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/api/v1/categories_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/api/v1/categories_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/api/v1/courses_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/api/v1/courses_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/api/v1/users_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/api/v1/users_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/api/v1/verticals_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/api/v1/verticals_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/course.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/course.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev.dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dev.dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/support/database_cleaner.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/support/database_cleaner.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +146,7 @@
       <workItem from="1722339772385" duration="478000" />
       <workItem from="1723935134983" duration="9089000" />
       <workItem from="1723945475826" duration="4061000" />
-      <workItem from="1723953867705" duration="29995000" />
+      <workItem from="1723953867705" duration="33930000" />
     </task>
     <servers />
   </component>
