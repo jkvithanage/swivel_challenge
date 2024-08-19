@@ -6,6 +6,16 @@ class Api::V1::VerticalsController < ApplicationController
     render json: verticals, meta: { total: courses.count }
   end
 
+  def search
+    results = if params[:query].present?
+                SearchService.new(Vertical, params[:query], params[:sort], %i[name]).call
+              else
+                Course.search('*')
+              end
+
+    render json: results, meta: { total: results.count }
+  end
+
   def show
     render json: { data: @vertical }
   end

@@ -28,6 +28,7 @@ services:
       elasticsearch:
         condition: service_healthy
     environment:
+      - PATH=/rails/bin:$PATH
       - DATABASE_URL=postgres://jkv:secret@db:5432/swivel_challenge_development
       - ELASTICSEARCH_URL=elasticsearch
       - ELASTICSEARCH_USERNAME=elastic

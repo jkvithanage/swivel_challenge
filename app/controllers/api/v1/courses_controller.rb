@@ -8,13 +8,7 @@ class Api::V1::CoursesController < ApplicationController
 
   def search
     results = if params[:query].present?
-                Course.search(
-                  params[:query],
-                  fields: %i[name author],
-                  operator: "or",
-                  order: { _score: :desc },
-                  match: :word_middle
-                )
+                SearchService.new(Course, params[:query], params[:sort], %i[name author]).call
               else
                 Course.search('*')
               end
