@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be662c1d-ccd2-4231-a6fc-e90e101d985f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/controllers/concerns/exception_handler.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/api/v1/search_controller.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/search_service.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/requests/api/v1/search_spec.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/api/v1/categories_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/api/v1/categories_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/api/v1/courses_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/api/v1/courses_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/api/v1/verticals_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/api/v1/verticals_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/category.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/category.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/vertical.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/vertical.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/doorkeeper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/doorkeeper.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/seeds.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/seeds.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev.dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dev.dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +45,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "serialize",
+    "git-widget-placeholder": "search",
     "last_opened_file_path": "/Users/jkv-mbp/code/jkvithanage/swivel_challenge",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -146,7 +155,7 @@
       <workItem from="1722339772385" duration="478000" />
       <workItem from="1723935134983" duration="9089000" />
       <workItem from="1723945475826" duration="4061000" />
-      <workItem from="1723953867705" duration="33930000" />
+      <workItem from="1723953867705" duration="43566000" />
     </task>
     <servers />
   </component>

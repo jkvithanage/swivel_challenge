@@ -6,13 +6,21 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :verticals
-      resources :categories
+      resources :verticals do
+        get :search, on: :collection, as: :search
+      end
+
+      resources :categories do
+        get :search, on: :collection, as: :search
+      end
+
       resources :courses do
         get :search, on: :collection, as: :search
       end
 
       resources :users, only: [:create]
+
+      get :search, to: 'search#search'
     end
   end
 

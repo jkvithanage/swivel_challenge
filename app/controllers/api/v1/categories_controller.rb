@@ -6,6 +6,16 @@ class Api::V1::CategoriesController < ApplicationController
     render json: categories, meta: { total: courses.count }
   end
 
+  def search
+    results = if params[:query].present?
+                SearchService.new(Category, params[:query], params[:sort], %i[name]).call
+              else
+                Course.search('*')
+              end
+
+    render json: results, meta: { total: results.count }
+  end
+
   def show
     render json: @category
   end

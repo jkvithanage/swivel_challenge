@@ -1,4 +1,5 @@
 class Category < ApplicationRecord
+  searchkick word_middle: [:name]
   include UniqueNameAcross
   belongs_to :vertical
   has_many :courses, dependent: :destroy

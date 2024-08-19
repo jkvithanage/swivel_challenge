@@ -1,4 +1,5 @@
 class Vertical < ApplicationRecord
+  searchkick word_middle: [:name]
   include UniqueNameAcross
   has_many :categories, dependent: :destroy
 

@@ -17,6 +17,9 @@ ENV RAILS_ENV="development" \
 RUN apt-get update -qq && \
   apt-get install --no-install-recommends -y build-essential git libvips pkg-config libpq-dev
 
+# Install bundler
+RUN gem install bundler -v '~> 2.5.0'
+
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
@@ -30,9 +33,6 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
   chown -R rails:rails /rails /usr/local/bundle db log storage tmp
-
-# Symlink the Rails binary to /usr/local/bin to run `rails` directly
-RUN ln -s /rails/bin/rails /usr/local/bin/rail
 
 # Switch to non-root user for security
 USER rails:rails

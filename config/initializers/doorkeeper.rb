@@ -15,6 +15,8 @@ Doorkeeper.configure do
 
   skip_client_authentication_for_password_grant true
 
+  access_token_expires_in 24.hours
+
   # This block will be called to check whether the resource owner is authenticated or not.
   # resource_owner_authenticator do
   #   raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"

@@ -40,3 +40,8 @@ end
 ActiveRecord::Base.connection.reset_pk_sequence!('verticals')
 ActiveRecord::Base.connection.reset_pk_sequence!('categories')
 ActiveRecord::Base.connection.reset_pk_sequence!('courses')
+
+# reindexing after
+Vertical.reindex
+Category.reindex
+Course.reindex
