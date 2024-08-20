@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
     {
       json: {
         error: "Unauthorized",
-        message: doorkeeper_error_description(error),
+        message: doorkeeper_error_description(error)
       }
     }
   end
