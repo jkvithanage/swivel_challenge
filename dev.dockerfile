@@ -15,7 +15,7 @@ ENV RAILS_ENV="development" \
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y build-essential git libvips pkg-config libpq-dev
+  apt-get install --no-install-recommends -y build-essential git libvips pkg-config libpq-dev postgresql-client
 
 # Install bundler
 RUN gem install bundler -v '~> 2.5.0'
@@ -31,11 +31,11 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-  chown -R rails:rails /rails /usr/local/bundle db log storage tmp
+#RUN useradd rails --create-home --shell /bin/bash && \
+#  chown -R rails:rails /rails /usr/local/bundle db log storage tmp
 
 # Switch to non-root user for security
-USER rails:rails
+#USER rails:rails
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-dev-entrypoint"]

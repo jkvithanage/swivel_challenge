@@ -1,12 +1,22 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
+
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
+abort('The Rails environment is running in production mode! Run RAILS_ENV=test bundle exec rspec') if Rails.env.production?
+# Prevent database truncation if the environment is development
+abort("Tests are running in development mode! Run RAILS_ENV=test bundle exec rspec") if Rails.env.development?
 require 'rspec/rails'
-require 'support/database_cleaner'
 # Add additional requires below this line. Rails is not loaded until this point!
+# require 'support/database_cleaner'
+
+Shoulda::Matchers.configure do |cfg|
+  cfg.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -30,7 +40,34 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
 RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include FactoryBot::Syntax::Methods
+
+  config.before(:suite) do
+    Vertical.reindex
+    Category.reindex
+    Course.reindex
+  end
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
@@ -39,7 +76,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  # config.use_transactional_fixtures = true
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -63,13 +100,4 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-
-  config.include FactoryBot::Syntax::Methods
-
-  Shoulda::Matchers.configure do |cfg|
-    cfg.integrate do |with|
-      with.test_framework :rspec
-      with.library :rails
-    end
-  end
 end
